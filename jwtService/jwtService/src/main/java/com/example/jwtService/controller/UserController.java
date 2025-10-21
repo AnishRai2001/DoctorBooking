@@ -46,12 +46,8 @@ public class UserController {
         // Convert JSON string to DTO
         ObjectMapper mapper = new ObjectMapper();
         RegisterRequest registerRequest = mapper.readValue(userJson, RegisterRequest.class);
-
-        // Set uploaded files in DTO
-        registerRequest.setProfilePictures(profilePictures);
-
-        // Call service to register user
-        RegisterRequest response = userService.registerUser(registerRequest);
+        registerRequest.setProfilePictures(profilePictures);  // Set uploaded files in DTO
+        RegisterRequest response = userService.registerUser(registerRequest);  // Call service to register user
 
         return ResponseEntity.ok(response);
     }
