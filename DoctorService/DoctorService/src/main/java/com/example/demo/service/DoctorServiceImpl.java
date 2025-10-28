@@ -127,31 +127,20 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	
 	// ✅ helper method to convert DTO → Entity
-	// ✅ Convert DTO → Entity
 	private Availability toEntity(AvailabilityDto dto) {
-	    if (dto == null) return null;
-	    Availability availability = new Availability();
-	    BeanUtils.copyProperties(dto, availability);
-	    return availability;
+		if (dto == null) {
+			return null;
+		}
+		Availability availability = new Availability();
+		BeanUtils.copyProperties(dto, availability);
+		return availability;
 	}
 
-	// ✅ Convert Entity → DTO (with nested availability)
+	// ✅ helper method to convert Entity → DTO
 	private DoctorDto toDto(Doctor doctor) {
-	    DoctorDto dto = new DoctorDto();
-	    BeanUtils.copyProperties(doctor, dto);
-
-	    if (doctor.getAvailabilitySlots() != null && !doctor.getAvailabilitySlots().isEmpty()) {
-	        List<AvailabilityDto> availabilityDtos = new ArrayList<>();
-	        for (Availability availability : doctor.getAvailabilitySlots()) {
-	            AvailabilityDto aDto = new AvailabilityDto();
-	            BeanUtils.copyProperties(availability, aDto);
-	            availabilityDtos.add(aDto);
-	        }
-	        dto.setAvailability(availabilityDtos);
-	    }
-
-	    return dto;
+		DoctorDto dto = new DoctorDto();
+		BeanUtils.copyProperties(doctor, dto);
+		return dto;
 	}
-
 
 }
