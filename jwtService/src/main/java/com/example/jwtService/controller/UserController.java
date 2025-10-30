@@ -65,16 +65,16 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<ApiResponse<String>>patientLogin(@RequestBody LoginRequest logindto){
 		ApiResponse<String > response=new ApiResponse<>();
-		UsernamePasswordAuthenticationToken  token=new UsernamePasswordAuthenticationToken(logindto.email(),logindto.password());
+		UsernamePasswordAuthenticationToken  token=new UsernamePasswordAuthenticationToken(logindto.getEmail(),logindto.getPassword());
 	
 		org.springframework.security.core.Authentication authentication=authenticationManager.authenticate(token);
 	
 		
 		if(authentication.isAuthenticated()) {
-			String jwtToken = jwtService.generateToken(logindto.email(),
+			String jwtToken = jwtService.generateToken(logindto.getEmail(),
 					authentication.getAuthorities().iterator().next().getAuthority());
 			
-			response.setMessage("Welcome "+logindto.email());
+			response.setMessage("Welcome "+logindto.getEmail());
 			response.setSuccess(true);
 			response.setData(jwtToken);
 			 return ResponseEntity.ok(response);
@@ -90,5 +90,4 @@ public class UserController {
 	
 	
 	}
-
 
