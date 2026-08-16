@@ -23,6 +23,7 @@ public class Doctor {
     private Long id;
 
     private String name;
+    private String title;
     private String specialization;
     private int experience;
     private String location;
